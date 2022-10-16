@@ -2,8 +2,11 @@
 
 # TODO => Update pulls on each branches if possible
 
-for reponame in $@ 
+cd "(dirname "$0")"  # Setting current directory to the calling folder
+for remote in $@ 
 do
+  basename=$(basename $remote)
+  reponame=${basenme%.*}
   echo $reponame
   mkdir -p $reponame
   cd $reponame
@@ -11,7 +14,7 @@ do
   for branch in "${branches[@]}"
   do
     bname=$( echo "$branch" | rev | cut -d/ -f1 | rev)
-    mkdir $bname
+    mkdir -p $bname
     cd $bname
     git init
     git remote add -t $bname -f origin $remote
@@ -19,6 +22,6 @@ do
     cd ..
   done
   cd ..
-  echo "Powerclone in " # TODO => Add time
+  echo "Powercloned in " # TODO => Add time
 done
 
