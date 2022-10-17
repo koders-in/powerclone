@@ -1,12 +1,11 @@
-#!bin/bash
+#!/bin/bash
 
 # TODO => Update pulls on each branches if possible
 
 start_time=$(date +%s)
-cd "$(dirname "$0")"  # Setting current directory to the calling folder
+cd "$PWD"
 for remote in $@ 
 do
-  # pwd
   basename=$(basename $remote)
   reponame=${basename%.*}
   mkdir -p $reponame
@@ -27,5 +26,5 @@ do
 done
 end_time=$(date +%s)
 elapsed=$(( end_time - start_time ))
-eval "echo Powercloned in: $(date -ud "@$elapsed" +'$((%s/3600/24)) days %H hr %M min %S sec')"
+echo "Powercloned in $elasped seconds"
 
